@@ -1,2 +1,0 @@
-# Spotified
-Created with CodeSandbox
