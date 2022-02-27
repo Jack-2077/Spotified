@@ -1,7 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
+const axios = require('axios');
 const querystring = require('querystring');
+const { query, response } = require('express');
 
 const app = express();
 
@@ -39,6 +41,45 @@ app.get('/login', (req, res) => {
   });
 
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
+});
+
+app.get('/callback', (req, res) => {
+  const code = req.query.code || null;
+  axios({
+    method: 'post',
+    url: 'https://accounts.spotify.com/api/token',
+    data: querystring.stringify({
+      grant_type: 'authorization_code',
+      code: code,
+      redirect_uri: REDIRECT_URI,
+    }),
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${new Buffer.from(
+        `${CLIENT_ID}:${CLIENT_SECRET}`
+      ).toString('base64')}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        const { access_token, token_type } = response.data;
+        axios
+          .get('https://api.spotify.com/v1/me', {
+            headers: {
+              Authorization: `${token_type} ${access_token}`,
+            },
+          })
+          .then((response) =>
+            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`)
+          );
+      } else {
+        res.send(response);
+      }
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+  // res.send('callback');
 });
 
 const port = 8888;
