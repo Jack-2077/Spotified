@@ -17,6 +17,19 @@ const LOCALSTORAGE_VALUES = {
 };
 
 /**
+ * Clear out all localStorage items we've set and reload the page
+ * @returns {void}
+ */
+export const logout = () => {
+  // Clear all localStorage items
+  for (const property in LOCALSTORAGE_KEYS) {
+    window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
+  }
+  // Navigate to homepage
+  window.location = window.location.origin;
+};
+
+/**
  * Checks if the amount of time that has elapsed between the timestamp in localStorage
  * and now is greater than the expiration time of 3600 seconds (1 hour).
  * @returns {boolean} Whether or not the access token in localStorage has expired
