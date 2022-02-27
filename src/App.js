@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className='App'>
-      <a href='http://localhost:8888/login'>LOGIN</a>
+      {!token ? <a href='http://localhost:8888/login'>LOGIN</a> : 'Welcome'}
     </div>
   );
 }
