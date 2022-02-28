@@ -3,20 +3,60 @@ import { useEffect, useState } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from '../spotify';
 import { catchErrors } from '../utils';
 
+import styled, { createGlobalStyle } from 'styled-components/macro';
+
+const GlobalStyle = createGlobalStyle`
+ :root {
+    --black: #121212;
+    --green: #1DB954;
+    --white: #ffffff;
+
+    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+}
+`;
+
+const StyledLoginButton = styled.a`
+  background-color: var(--green);
+  color: var(--white);
+  padding: 10px 20px;
+  margin: 20px auto;
+  border-radius: 30px;
+  display: inline-block;
+`;
+
 function Home() {
   const [token, setToken] = useState(null);
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    setToken(accessToken);
+    if (accessToken) {
+      setToken(accessToken);
 
-    const fetchData = async () => {
-      const { data } = await getCurrentUserProfile();
-      setProfile(data);
-      console.log(data);
-    };
+      const fetchData = async () => {
+        const { data } = await getCurrentUserProfile();
+        setProfile(data);
+        console.log(data);
+      };
 
-    catchErrors(fetchData());
+      catchErrors(fetchData());
+    }
   }, []);
 
   const Profile = () => (
@@ -28,9 +68,12 @@ function Home() {
   );
 
   return (
-    <div className='App'>
+    <div>
+      <GlobalStyle />
       {!token ? (
-        <a href='http://localhost:8888/login'>LOGIN</a>
+        <StyledLoginButton href='http://localhost:8888/login'>
+          Log in to Spotify
+        </StyledLoginButton>
       ) : (
         <>
           <h1>Welcome</h1>

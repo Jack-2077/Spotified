@@ -2,7 +2,6 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import { Playlist, Playlists, TopArtists, TopTracks, Home } from './components';
 import ScrollToTop from './components/ScrollToTop';
-import './App.css';
 
 function App() {
   return (
