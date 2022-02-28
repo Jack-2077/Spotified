@@ -4,7 +4,7 @@ import { accessToken, logout, getCurrentUserProfile } from '../spotify';
 import { catchErrors } from '../utils';
 
 import styled from 'styled-components/macro';
-import { GlobalStyle } from './styles/GlobalStyles';
+import { GlobalStyle } from './styles';
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
