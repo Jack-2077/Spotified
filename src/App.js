@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { Playlist, Playlists, TopArtists, TopTracks, Home } from './components';
 import './App.css';
+
 import { accessToken, logout, getCurrentUserProfile } from './spotify';
 import { catchErrors } from './utils';
 
@@ -35,7 +39,7 @@ function App() {
         <>
           <h1>Welcome</h1>
           {profile && <Profile />}
-
+          <Home />
           <button onClick={logout}>Log out</button>
         </>
       )}
