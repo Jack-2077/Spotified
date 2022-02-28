@@ -22,6 +22,14 @@ function App() {
     fetchData();
   }, []);
 
+  const Profile = () => (
+    <>
+      <h1>{profile.display_name}</h1>
+      <h2>Followers : {profile.followers.total}</h2>
+      {profile.images.length && <img src={profile.images[0].url} />}
+    </>
+  );
+
   return (
     <div className='App'>
       {!token ? (
@@ -29,6 +37,8 @@ function App() {
       ) : (
         <>
           <h1>Welcome</h1>
+          {profile && <Profile />}
+
           <button onClick={logout}>Log out</button>
         </>
       )}
