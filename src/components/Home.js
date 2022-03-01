@@ -7,7 +7,7 @@ import { catchErrors } from '../utils';
 import styled from 'styled-components/macro';
 import { GlobalStyle } from './styles';
 
-const StyledLoginButton = styled.button`
+const StyledButton = styled.button`
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-md);
@@ -45,7 +45,7 @@ function Home() {
         <Login />
       ) : (
         <>
-          <StyledLoginButton onClick={logout}>Log out</StyledLoginButton>
+          <StyledButton onClick={logout}>Log out</StyledButton>
           {profile && <Profile />}
         </>
       )}
