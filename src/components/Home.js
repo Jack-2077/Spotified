@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Login } from './pages';
+import { Login, Profile } from './pages';
 import { accessToken, logout, getCurrentUserProfile } from '../spotify';
 import { catchErrors } from '../utils';
 
@@ -24,14 +24,6 @@ function Home() {
     }
   }, []);
 
-  const Profile = () => (
-    <>
-      <h1>{profile.display_name}</h1>
-      <h2>Followers : {profile.followers.total}</h2>
-      {profile.images.length && <img src={profile.images[0].url} />}
-    </>
-  );
-
   return (
     <div>
       <GlobalStyle />
@@ -39,9 +31,8 @@ function Home() {
         <Login />
       ) : (
         <>
-          <h1>Welcome</h1>
-          {profile && <Profile />}
           <button onClick={logout}>Log out</button>
+          {profile && <Profile />}
         </>
       )}
     </div>

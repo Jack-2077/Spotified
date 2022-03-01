@@ -74,8 +74,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   img {
-    width: 100%;
-    max-width: 100%;
+    height: 100px;
+    width: 100px;
+    /* width: 100%;
+    max-width: 100%; */
     vertical-align: middle;
   }
 
