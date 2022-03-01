@@ -4,6 +4,8 @@ import {
   getCurrentUserPlaylists,
   getTopArtists,
 } from '../../spotify';
+
+import { SectionWrapper, ArtistsGrid } from '../';
 import { catchErrors } from '../../utils';
 import { StyledHeader } from '../styles';
 
@@ -64,6 +66,16 @@ const Profile = () => {
             </div>
           </div>
         </StyledHeader>
+      )}
+      {artists && (
+        <main>
+          <SectionWrapper
+            title='Top artists this month'
+            seeAllLink='/top-artists'
+          >
+            <ArtistsGrid artists={artists.items.slice(0, 10)} />
+          </SectionWrapper>
+        </main>
       )}
     </>
   );
