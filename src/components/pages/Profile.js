@@ -6,7 +6,7 @@ import {
   getTopTracks,
 } from '../../spotify';
 
-import { SectionWrapper, ArtistsGrid } from '../';
+import { SectionWrapper, ArtistsGrid, TopTracks } from '../';
 import { catchErrors } from '../../utils';
 import { StyledHeader } from '../styles';
 
@@ -28,7 +28,7 @@ const Profile = () => {
       setArtists(userArtists.data);
 
       const userTracks = await getTopTracks();
-      setArtists(userTracks.data);
+      setTracks(userTracks.data);
     };
 
     catchErrors(fetchData());
@@ -65,13 +65,20 @@ const Profile = () => {
           </div>
         </StyledHeader>
       )}
-      {artists && (
+      {artists && tracks && (
         <main>
           <SectionWrapper
             title='Top artists this month'
             seeAllLink='/top-artists'
           >
             <ArtistsGrid artists={artists.items.slice(0, 10)} />
+          </SectionWrapper>
+
+          <SectionWrapper
+            title='Top tracks this month'
+            seeAllLink='/top-tracks'
+          >
+            <TopTracks tracks={tracks.items.slice(0, 10)} />
           </SectionWrapper>
         </main>
       )}
