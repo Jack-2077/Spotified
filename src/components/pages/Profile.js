@@ -3,6 +3,7 @@ import {
   getCurrentUserProfile,
   getCurrentUserPlaylists,
   getTopArtists,
+  getTopTracks,
 } from '../../spotify';
 
 import { SectionWrapper, ArtistsGrid } from '../';
@@ -13,27 +14,24 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [playlists, setPlaylists] = useState(null);
   const [artists, setArtists] = useState(null);
+  const [tracks, setTracks] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
-    };
 
-    const fetchPlaylists = async () => {
       const userPlaylists = await getCurrentUserPlaylists();
       setPlaylists(userPlaylists.data);
-    };
 
-    const fetchArtists = async () => {
       const userArtists = await getTopArtists();
       setArtists(userArtists.data);
-      console.log(userArtists.data);
+
+      const userTracks = await getTopTracks();
+      setArtists(userTracks.data);
     };
 
     catchErrors(fetchData());
-    catchErrors(fetchPlaylists());
-    catchErrors(fetchArtists());
   }, []);
 
   return (
