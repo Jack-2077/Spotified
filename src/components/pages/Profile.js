@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
-import { getCurrentUserProfile, getCurrentUserPlaylists } from '../../spotify';
+import {
+  getCurrentUserProfile,
+  getCurrentUserPlaylists,
+  getTopArtists,
+} from '../../spotify';
 import { catchErrors } from '../../utils';
 import { StyledHeader } from '../styles';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [playlists, setPlaylists] = useState(null);
+  const [artists, setArtists] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,8 +23,15 @@ const Profile = () => {
       setPlaylists(userPlaylists.data);
     };
 
+    const fetchArtists = async () => {
+      const userArtists = await getTopArtists();
+      setArtists(userArtists.data);
+      console.log(userArtists.data);
+    };
+
     catchErrors(fetchData());
     catchErrors(fetchPlaylists());
+    catchErrors(fetchArtists());
   }, []);
 
   return (
