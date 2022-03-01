@@ -1,19 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { Login } from './pages';
 import { accessToken, logout, getCurrentUserProfile } from '../spotify';
 import { catchErrors } from '../utils';
 
-import styled from 'styled-components/macro';
 import { GlobalStyle } from './styles';
-
-const StyledLoginButton = styled.a`
-  background-color: var(--green);
-  color: var(--white);
-  padding: 10px 20px;
-  margin: 20px auto;
-  border-radius: 30px;
-  display: inline-block;
-`;
 
 function Home() {
   const [token, setToken] = useState(null);
@@ -45,9 +36,7 @@ function Home() {
     <div>
       <GlobalStyle />
       {!token ? (
-        <StyledLoginButton href='http://localhost:8888/login'>
-          Log in to Spotify
-        </StyledLoginButton>
+        <Login />
       ) : (
         <>
           <h1>Welcome</h1>
