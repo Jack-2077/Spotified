@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Login, Profile } from './pages';
+import { Login, Profile } from '../pages';
 import { accessToken, logout, getCurrentUserProfile } from '../spotify';
 import { catchErrors } from '../utils';
 
