@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 
 import { Playlist, Playlists, TopTracks, Home } from './components';
-import { TopArtists } from './components/pages';
+import { TopArtists } from './pages';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
