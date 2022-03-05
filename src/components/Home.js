@@ -45,7 +45,7 @@ function Home() {
         <Login />
       ) : (
         <>
-          <StyledButton onClick={logout}>Log out</StyledButton>
+          <StyledButton onClick={logout}>Log Out</StyledButton>
           {profile && <Profile />}
         </>
       )}
