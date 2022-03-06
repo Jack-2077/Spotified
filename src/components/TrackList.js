@@ -1,8 +1,10 @@
 import { formatDuration } from '../utils';
 import { StyledTopTracks } from './styles';
+import { GlobalStyle } from './styles';
 
-const TopTracks = ({ tracks }) => (
+const TrackList = ({ tracks }) => (
   <>
+    <GlobalStyle />
     {tracks && tracks.length ? (
       <StyledTopTracks>
         {tracks.map((track, i) => (
@@ -43,4 +45,4 @@ const TopTracks = ({ tracks }) => (
   </>
 );
 
-export default TopTracks;
+export default TrackList;

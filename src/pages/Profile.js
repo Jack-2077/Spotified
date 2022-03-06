@@ -9,9 +9,10 @@ import {
 import {
   SectionWrapper,
   ArtistsGrid,
-  TopTracks,
   PlaylistsGrid,
+  TrackList,
 } from '../components';
+
 import { catchErrors } from '../utils';
 import { StyledHeader } from '../components/styles';
 
@@ -83,7 +84,7 @@ const Profile = () => {
             title='Top tracks this month'
             seeAllLink='/top-tracks'
           >
-            <TopTracks tracks={tracks.items.slice(0, 10)} />
+            <TrackList tracks={tracks.items.slice(0, 10)} />
           </SectionWrapper>
 
           <SectionWrapper title='Playlists' seeAllLink='/playlists'>
