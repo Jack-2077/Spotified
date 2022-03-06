@@ -1,10 +1,8 @@
 import { formatDuration } from '../utils';
 import { StyledTopTracks } from './styles';
-import { GlobalStyle } from './styles';
 
 const TrackList = ({ tracks }) => (
   <>
-    <GlobalStyle />
     {tracks && tracks.length ? (
       <StyledTopTracks>
         {tracks.map((track, i) => (

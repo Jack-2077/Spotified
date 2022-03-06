@@ -5,7 +5,6 @@ import { accessToken, logout, getCurrentUserProfile } from '../spotify';
 import { catchErrors } from '../utils';
 
 import styled from 'styled-components/macro';
-import { GlobalStyle } from './styles';
 
 const StyledButton = styled.button`
   position: absolute;
@@ -40,7 +39,6 @@ function Home() {
 
   return (
     <div>
-      <GlobalStyle />
       {!token ? (
         <Login />
       ) : (
