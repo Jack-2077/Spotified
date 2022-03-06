@@ -14,9 +14,8 @@ function App() {
         <Route index element={<Home />} />
         <Route path='top-artists' element={<TopArtists />} />
         <Route path='top-tracks' element={<TopTracks />} />
-        <Route path='playlists' element={<Playlists />}>
-          <Route path=':id' element={<Playlist />} />
-        </Route>
+        <Route path='playlists' element={<Playlists />} />
+        <Route path='playlists/:id' element={<Playlist />} />
       </Routes>
     </Router>
   );
