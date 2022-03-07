@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Outlet } from 'react-router-dom';
 import { PlaylistsGrid, SectionWrapper } from '../components';
 
 import { getCurrentUserPlaylists } from '../spotify';
