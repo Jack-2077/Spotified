@@ -1,21 +1,53 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { catchErrors } from '../utils';
 import { getPlaylistById } from '../spotify';
+import { TrackList, SectionWrapper } from '../components';
 import { StyledHeader } from '../components/styles';
 
 const Playlist = () => {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState(null);
+  const [tracksData, setTracksData] = useState(null);
+  const [tracks, setTracks] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getPlaylistById(id);
       setPlaylist(data);
+      setTracksData(data.tracks);
     };
 
     catchErrors(fetchData());
   }, [id]);
+
+  const tracksForTracklist = useMemo(() => {
+    if (!tracks) {
+      return;
+    }
+    return tracks.map(({ track }) => track);
+  }, [tracks]);
+
+  // When tracksData updates, compile arrays of tracks and audioFeatures
+  useEffect(() => {
+    if (!tracksData) {
+      return;
+    }
+
+    // When tracksData updates, check if there are more tracks to fetch
+    // then update the state variable
+    const fetchMoreData = async () => {
+      if (tracksData.next) {
+        const { data } = await axios.get(tracksData.next);
+        setTracksData(data);
+      }
+    };
+
+    setTracks((tracks) => [...(tracks ? tracks : []), ...tracksData.items]);
+
+    catchErrors(fetchMoreData());
+  }, [tracksData]);
 
   return (
     <>
@@ -48,6 +80,12 @@ const Playlist = () => {
               </div>
             </div>
           </StyledHeader>
+
+          <main>
+            <SectionWrapper title='Playlist' breadcrumb={true}>
+              {tracksForTracklist && <TrackList tracks={tracksForTracklist} />}
+            </SectionWrapper>
+          </main>
         </>
       )}
     </>
