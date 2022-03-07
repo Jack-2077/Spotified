@@ -13,7 +13,7 @@ const Playlist = () => {
   const [tracks, setTracks] = useState(null);
   const [audioFeatures, setAudioFeatures] = useState(null);
   const [sortValue, setSortValue] = useState('');
-  const sortOptions = ['danceability', 'tempo', 'energy'];
+  const sortOptions = ['danceability', 'tempo', 'energy', 'tempo'];
 
   // Get playlist data based on ID from route params
   useEffect(() => {
