@@ -2,6 +2,13 @@
   "name": "spotified",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.16.0"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "proxy": "http://localhost:8888",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -18,10 +25,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start-server": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "server": "nodemon index.js",
     "client": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=production npm install && npm run build",
+    "start": "node index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
