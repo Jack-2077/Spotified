@@ -11,6 +11,7 @@ import {
   ArtistsGrid,
   PlaylistsGrid,
   TrackList,
+  Loader,
 } from '../components';
 
 import { catchErrors } from '../utils';
@@ -71,7 +72,7 @@ const Profile = () => {
           </div>
         </StyledHeader>
       )}
-      {artists && tracks && playlists && (
+      {artists && tracks && playlists ? (
         <main>
           <SectionWrapper
             title='Top artists this month'
@@ -91,6 +92,8 @@ const Profile = () => {
             <PlaylistsGrid playlists={playlists.items.slice(0, 5)} />
           </SectionWrapper>
         </main>
+      ) : (
+        <Loader />
       )}
     </>
   );
