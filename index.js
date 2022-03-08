@@ -3,7 +3,6 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const querystring = require('querystring');
-const { query, response } = require('express');
 const path = require('path');
 
 const app = express();
