@@ -20,31 +20,37 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-const randomString = (length) =>
-  Math.random()
-    .toString(36)
-    .substr(2, length)
-    .split('')
-    .map((e) => (Math.random() < Math.random() ? e.toUpperCase() : e))
-    .join()
-    .replace(/,/g, '');
+/**
+ * Generates a random string containing numbers and letters
+ * @param  {number} length The length of the string
+ * @return {string} The generated string
+ */
+const generateRandomString = (length) => {
+  let text = '';
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
 
 const stateKey = 'spotify_auth_state';
 
 app.get('/login', (req, res) => {
-  const state = randomString(16);
+  const state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  let scope = ['user-read-private', 'user-read-email', 'user-top-read'].join(
+  const scope = ['user-read-private', 'user-read-email', 'user-top-read'].join(
     ' '
   );
 
-  queryParams = querystring.stringify({
-    response_type: 'code',
+  const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
+    response_type: 'code',
     redirect_uri: REDIRECT_URI,
+    state: state,
     scope: scope,
-    state,
   });
 
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
